@@ -2,38 +2,16 @@ var currentQuestion = 0;
 var correctAnswers = 0;
 var quizOver = false;
 
-var questions = [{
-    question: "You need this body part to do the 'dab'?",
-    options: ["leg", "feet", "stomach", "arm"],
-    correctAnswer: 3
-}, {
-    question: "What is the name of Kim Kardashian's daugther?",
-    options: ["South", "West", "North", "Southeast"],
-    correctAnswer: 2
-}, {
-    question: "This song by rapper Desiigner became a top hit eventually landing him a record deal?",
-    options: ["Lion", "Panda", "Snake", "Hamster"],
-    correctAnswer: 1
-}, {
-    question: "The mannequin challenge consist of?",
-    options: ["People at a standstill", "Dogs at a standstill", "Group of cows", "Madea"],
-    correctAnswer: 0
-}, {
-    question: "Finish this song: it goes down in the ______?",
-    options: ["PM", "DM", "CM", "AM"],
-    correctAnswer: 1
-}];
+var questions = ["You need this body part to do the 'dab'?","What is the name of Kim Kardashian's daugther?",
+    "This song by rapper Desiigner became a top hit eventually landing him a record deal?",
+     "The mannequin challenge consist of?","Finish this song: it goes down in the ______?"]
 
-
-/*
 $(document).ready(function () {
-
-    // Display the first question
-    displayCurrentQuestion();
+    displaycurrentQuestion();
     $(this).find(".quizMessage").hide();
 
     // On clicking next, display the next question
-    $(this).find(".nextButton").on("click", function () {
+    $(this).find("#nextButton").on("click", function () {
         if (!quizOver) {
 
             value = $("input[type='radio']:checked").val();
@@ -63,7 +41,7 @@ $(document).ready(function () {
             }
         } else { // quiz is over and clicked the next button (which now displays 'Play Again?'
             quizOver = false;
-            $(document).find(".nextButton").text("Next Question");
+            $("#nextButton").text("Next Question");
             resetQuiz();
             displayCurrentQuestion();
             hideScore();
@@ -79,7 +57,7 @@ function displayCurrentQuestion() {
 
     var question = questions[currentQuestion].question;
     var questionClass = $(document).find(".quizContainer > .question");
-    var choiceList = $(document).find(".quizContainer > .choiceList");
+    var options = $(document).find(".quizContainer > .choiceList");
     var numChoices = questions[currentQuestion].choices.length;
 
     // Set the questionClass text to the current question
@@ -108,4 +86,4 @@ function displayScore() {
 
 function hideScore() {
     $(document).find(".result").hide();
-}*/
+}
