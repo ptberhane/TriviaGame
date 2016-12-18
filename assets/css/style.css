@@ -1,18 +1,25 @@
 header{
 	text-align:center;
-	font-size:32px;
+	font-size:32px;	
+	background-color:white;
+	opacity:0.9;
+	font-weight:bold;
+	margin:20px;
+
 }
 
 body{
-	background-color:white;
+	font-size:32px;	
+	background-image:url("../images/background.jpg");
 	
 }
 
-.Questions{
-	
 
+.display{
+	text-align:center;
 }
 
 .container{
 	background-color:white;
+	opacity:0.9;
 }

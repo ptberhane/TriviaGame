@@ -1,89 +1,65 @@
-var currentQuestion = 0;
-var correctAnswers = 0;
-var quizOver = false;
+var count = 30;
+var counter = setInterval(timer,1000);
 
-var questions = ["You need this body part to do the 'dab'?","What is the name of Kim Kardashian's daugther?",
-    "This song by rapper Desiigner became a top hit eventually landing him a record deal?",
-     "The mannequin challenge consist of?","Finish this song: it goes down in the ______?"]
+function timer (){
+	count -= 1
+	if (count===0){
+	clearInterval(counter);
+	alert("Time's up!!");
+	}
 
-$(document).ready(function () {
-    displaycurrentQuestion();
-    $(this).find(".quizMessage").hide();
+	$("#display").html(count);
 
-    // On clicking next, display the next question
-    $(this).find("#nextButton").on("click", function () {
-        if (!quizOver) {
+};
 
-            value = $("input[type='radio']:checked").val();
 
-            if (value == undefined) {
-                $(document).find(".quizMessage").text("Please select an answer");
-                $(document).find(".quizMessage").show();
-            } else {
-                // TODO: Remove any message -> not sure if this is efficient to call this each time....
-                $(document).find(".quizMessage").hide();
+//this should appear after done button has been clicked
+$("#done").click(function() {             
 
-                if (value == questions[currentQuestion].correctAnswer) {
-                    correctAnswers++;
-                }
+if (!$("input[name=q1]:checked").val() ||            
+!$("input[name=q2]:checked").val() ||            
+!$("input[name=q3]:checked").val() ||            
+!$("input[name=q4]:checked").val() ||            
+!$("input[name=q5]:checked").val()                    
+){           
+alert("You're not done yet!");        
+}        
 
-                currentQuestion++; // Since we have already displayed the first question on DOM ready
-                if (currentQuestion < questions.length) {
-                    displayCurrentQuestion();
-                } else {
-                    displayScore();
-                    //                    $(document).find(".nextButton").toggle();
-                    //                    $(document).find(".playAgainButton").toggle();
-                    // Change the text in the next button to ask if user wants to play again
-                    $(document).find(".nextButton").text("Play Again?");
-                    quizOver = true;
-                }
-            }
-        } else { // quiz is over and clicked the next button (which now displays 'Play Again?'
-            quizOver = false;
-            $("#nextButton").text("Next Question");
-            resetQuiz();
-            displayCurrentQuestion();
-            hideScore();
-        }
-    });
+else {            
+var part1name = "1";            
+var part2name = "2";            
+var part3name = "3";            
+var part4name = "4";            
+var part5name = "5";
+var part6name = "None";                      
 
+var part1 = ($("input[name=q1]:checked").val() != "d"); 
+           
+var part2 = ($("input[name=q2]:checked").val() != "c");  
+
+var part3 = ($("input[name=q3]:checked").val() != "b");  
+
+var part4 = ($("input[name=q4]:checked").val() != "a");  
+
+var part5 = ($("input[name=q5]:checked").val() != "c");  
+
+var part6 = (!part1 && !part2 && !part3 && !part4 && !part5 ); var parts = [];                        
+
+if (part1) { parts.push(part1name) };            
+if (part2) { parts.push(part2name) };            
+if (part3) { parts.push(part3name) };            
+if (part4) { parts.push(part4name) };            
+if (part5) { parts.push(part5name) };                       
+if (part6) { parts.push(part6name) };                        
+
+
+
+if (part1) { $("#part1").show("slow"); };            
+if (part2) { $("#part2").show("slow"); };            
+if (part3) { $("#part3").show("slow"); };            
+if (part4) { $("#part4").show("slow"); };            
+if (part5) { $("#part5").show("slow"); };                       
+if (part6) { $("#part6").show("slow"); };
+{ $("#closing").show("slow"); };
+}
 });
-
-// This displays the current question AND the choices
-function displayCurrentQuestion() {
-
-    console.log("In display current Question");
-
-    var question = questions[currentQuestion].question;
-    var questionClass = $(document).find(".quizContainer > .question");
-    var options = $(document).find(".quizContainer > .choiceList");
-    var numChoices = questions[currentQuestion].choices.length;
-
-    // Set the questionClass text to the current question
-    $(questionClass).text(question);
-
-    // Remove all current <li> elements (if any)
-    $(choiceList).find("li").remove();
-
-    var choice;
-    for (i = 0; i < numChoices; i++) {
-        choice = questions[currentQuestion].choices[i];
-        $('<li><input type="radio" value=' + i + ' name="dynradio" />' + choice + '</li>').appendTo(choiceList);
-    }
-}
-
-function resetQuiz() {
-    currentQuestion = 0;
-    correctAnswers = 0;
-    hideScore();
-}
-
-function displayScore() {
-    $(document).find(".quizContainer > .result").text("You scored: " + correctAnswers + " out of: " + questions.length);
-    $(document).find(".quizContainer > .result").show();
-}
-
-function hideScore() {
-    $(document).find(".result").hide();
-}
